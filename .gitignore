@@ -1,0 +1,31 @@
+# blacklist everything
+*
+
+# allow non-empty directories
+!**/
+
+# build files
+_build/
+
+# git(1) stuff
+!/.gitignore
+
+# license and readme
+!/LICENSE.md
+!/README.md
+
+# useful things
+!/.iex.exs
+!/.formatter.exs
+!/.credo.exs
+!/.editorconfig
+
+# mix(1) stuff
+!/mix.exs
+!/mix.lock
+
+# src code
+!/lib/**/*.ex
+
+# tests
+!/test/**/*
