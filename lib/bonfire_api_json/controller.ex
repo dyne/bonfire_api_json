@@ -5,7 +5,7 @@ defmodule Bonfire.API.JSON.Controller do
 
   alias Bonfire.Common.Pointers
 
-  def get_objects(conn, %{"ids" => ids}) when is_list(ids) do
+  def get_objects(conn, %{"ids" => ids} = params) when is_list(ids) do
     objs = Enum.reduce(ids, [], fn id, acc ->
       case Pointers.get(id, skip_boundary_check: true) do
         {:ok, obj} ->
@@ -19,7 +19,12 @@ defmodule Bonfire.API.JSON.Controller do
       end
     end)
 
-    json(conn, %{data: objs})
+    unwind? = params["unwind"] == true
+    json(conn, if unwind? do
+      objs
+    else
+      %{data: objs}
+    end)
   end
 
   def get_objects(conn, _) do
@@ -46,7 +51,12 @@ defmodule Bonfire.API.JSON.Controller do
       %ValueFlows.Process{} = p -> process(p)
     end)
 
-    json(conn, %{data: track})
+    unwind? = params["unwind"] == true
+    json(conn, if unwind? do
+      track
+    else
+      %{data: track}
+    end)
   end
 
   def track(conn, _) do
@@ -73,7 +83,12 @@ defmodule Bonfire.API.JSON.Controller do
       %ValueFlows.Process{} = p -> process(p)
     end)
 
-    json(conn, %{data: trace})
+    unwind? = params["unwind"] == true
+    json(conn, if unwind? do
+      trace
+    else
+      %{data: trace}
+    end)
   end
 
   def trace(conn, _) do
