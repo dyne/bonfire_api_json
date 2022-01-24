@@ -5,7 +5,7 @@ defmodule Bonfire.API.JSON.MixProject do
     [
       app: :bonfire_api_json,
       version: "0.1.0",
-      elixir: "~> 1.13",
+      elixir: "~> 1.10",
       start_permanent: Mix.env() == :prod,
       deps: deps(),
     ]
@@ -19,9 +19,9 @@ defmodule Bonfire.API.JSON.MixProject do
 
   defp deps() do
     [
-      {:bonfire_data_identity, ">= 0.0.0"},
-      {:bonfire_valueflows, ">= 0.0.0"},
-      {:bonfire_common, ">= 0.0.0"},
+      {:bonfire_data_identity, git: "https://github.com/bonfire-networks/bonfire_data_identity.git", branch: "main"},
+      {:bonfire_valueflows, git: "https://github.com/dyne/bonfire_valueflows.git", branch: "bf"},
+      {:bonfire_common, git: "https://github.com/bonfire-networks/bonfire_common.git", branch: "main"},
     ]
   end
 end
