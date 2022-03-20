@@ -19,9 +19,9 @@ defmodule Bonfire.API.JSON.MixProject do
 
   defp deps() do
     [
-      {:bonfire_data_identity, git: "https://github.com/bonfire-networks/bonfire_data_identity.git", branch: "main"},
-      {:bonfire_valueflows, git: "https://github.com/dyne/bonfire_valueflows.git", branch: "bf"},
-      {:bonfire_common, git: "https://github.com/bonfire-networks/bonfire_common.git", branch: "main"},
+      {:bonfire_data_identity, ">= 0.0.0"},
+      {:bonfire_valueflows, ">= 0.0.0"},
+      {:bonfire_common, ">= 0.0.0"},
     ]
   end
 end
