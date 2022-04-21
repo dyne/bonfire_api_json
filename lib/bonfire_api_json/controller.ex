@@ -4,6 +4,7 @@ defmodule Bonfire.API.JSON.Controller do
   import Bonfire.Common.Config, only: [repo: 0]
 
   alias Bonfire.Common.Pointers
+  alias Bonfire.Data.Identity.User
 
   def get_objects(conn, %{"ids" => ids} = params) when is_list(ids) do
     objs = Enum.reduce(ids, [], fn id, acc ->
@@ -13,6 +14,7 @@ defmodule Bonfire.API.JSON.Controller do
             %ValueFlows.EconomicResource{} -> economic_resource(obj)
             %ValueFlows.EconomicEvent{} -> economic_event(obj)
             %ValueFlows.Process{} -> process(obj)
+            %User{} -> agent(obj)
           end
           [obj | acc]
         {:error, :not_found} -> acc
@@ -210,12 +212,13 @@ defmodule Bonfire.API.JSON.Controller do
   end
   defp process(_), do: nil
 
-  defp agent(%Bonfire.Data.Identity.User{} = a) do
+  defp agent(%User{} = a) do
     a = repo().preload(a, [:character, :profile])
 
     %{
       id: a.id,
       name: a.profile.name,
+      note: a.profile.summary,
       displayUsername: a.character.username,
     }
   end
