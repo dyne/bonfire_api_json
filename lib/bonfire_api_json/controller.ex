@@ -1,5 +1,5 @@
 defmodule Bonfire.API.JSON.Controller do
-  use Bonfire.Web, :controller
+  use Bonfire.UI.Common.Web, :controller
 
   import Bonfire.Common.Config, only: [repo: 0]
 
